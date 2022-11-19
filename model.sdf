@@ -1,0 +1,301 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name="NADS robot">
+    <static>false</static>
+            <link name='chassis'>
+            <pose>0 0 .1 0 0 0</pose>
+
+            <collision name='collision'>
+              <geometry>
+                <box>
+                  <size>0.22225 .1016 0.00635</size>
+                </box>
+              </geometry>
+            </collision>
+
+            <visual name='visual'>
+              <geometry>
+                <box>
+                  <size>0.22225 .1016 0.00635</size>
+                </box>
+              </geometry>
+            </visual>
+          </link>
+          
+          <link name='camera_pillar'>
+          <pose>0.08255 0 0.1899 0 0 0</pose>
+          <collision name = 'collison'>
+            <geometry>
+              <box>
+                <size>0.00254 0.1016 0.1778</size>
+              </box>
+            </geometry>
+          </collision>
+          <visual name = 'visual'>
+            <geometry>
+              <box>
+                <size>0.00254 0.1016 0.1778</size>
+              </box>
+            </geometry>
+          </visual>
+        </link>
+        
+        <link name="camera">
+        <pose>0.08763 0 0.2778 0 0 0</pose>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.0127 0.0127 0.0127</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.0127 0.0127 0.0127</size>
+            </box>
+          </geometry>
+        </visual>
+        <sensor name="camera" type="camera">
+          <camera>
+            <save enabled="true">
+              <path>/tmp/camera_save</path>
+            </save>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>320</width>
+              <height>240</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>true</visualize>
+          <topic>camera</topic>
+        </sensor>
+      </link>
+          <link name="back_left_wheel">
+        <pose>-0.08255 0.0635 .1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <link name="back_right_wheel">
+        <pose>-0.08255 -0.0635 0.1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <link name="front_left_wheel">
+        <pose>0.08255 0.0635 0.1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <link name="front_right_wheel">
+        <pose>0.08255 -0.0635 0.1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <joint type="fixed" name="chassis_pillar_connection">
+        <pose>0 0 0 0 0 0</pose>
+        <child>camera_pillar</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz> 0 0 0</xyz>
+        </axis>
+      </joint>
+      
+      <joint type = "fixed" name = "camera_pillar_connection">
+      <pose>0 0 0 0 0 0</pose>
+        <child>camera</child>
+        <parent>camera_pillar</parent>
+        <axis>
+          <xyz> 0 0 0</xyz>
+        </axis>
+      </joint>
+      
+      <joint type="revolute" name="back_left_wheel_hinge">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <child>back_left_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      
+      <joint type="revolute" name="back_right_wheel_hinge">
+        <pose>0 0 0.03 0 0 0</pose>
+        <child>back_right_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      
+      <joint type="revolute" name="front_left_wheel_hinge">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <child>front_left_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      
+      <joint type="revolute" name="front_right_wheel_hinge">
+        <pose>0 0 0.03 0 0 0</pose>
+        <child>front_right_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      <link name='trailer'>
+            <pose>-0.288925 0 .1 0 0 0</pose>
+
+            <collision name='collision'>
+              <geometry>
+                <box>
+                  <size>0.3048 .1016 0.00635</size>
+                </box>
+              </geometry>
+            </collision>
+
+            <visual name='visual'>
+              <geometry>
+                <box>
+                  <size>0.3048 .1016 0.00635</size>
+                </box>
+              </geometry>
+            </visual>
+          </link>
+        <link name="trailer_left_wheel">
+        <pose>-0.288925 0.0635 .1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+       <link name="trailer_right_wheel">
+        <pose>-0.288925 -0.0635 .1 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.028575</radius>
+              <length>0.0254</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <joint type="revolute" name="trailer_left_wheel_hinge">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <child>trailer_left_wheel</child>
+        <parent>trailer</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      <joint type="revolute" name="trailer_right_wheel_hinge">
+        <pose>0 0 0.03 0 0 0</pose>
+        <child>trailer_right_wheel</child>
+        <parent>trailer</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      
+      <joint type="revolute" name="trailer_connection_hinge">
+        <pose>-0.123825 0 0 0 0 0</pose>
+        <child>trailer</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 0</xyz>
+        </axis>
+      </joint>
+  </model>
+  
+</sdf>
